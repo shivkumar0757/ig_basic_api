@@ -3,33 +3,34 @@
 {% block content %}
   <div class="container">
     <div class="row">
+      <!-- The existing code here... -->
+
+      <!-- New section for token response -->
       <div class="col-md-6 mt-5">
-        <h1 class="mb-4">Auth</h1>
+        <h1 class="mb-4">Access Token</h1>
         <hr>
-        <p><strong>URL:</strong> {{ full_url }}</p>
-        <hr>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Key</th>
-              <th>Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Base URL </td>
-              <td> {{ base_url }}</td>
-            </tr>
-            {% for key, values in parameters.items %}
-              {% for value in values %}
+        {% if token_response %}
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for key, value in token_response.items %}
                 <tr>
                   <td><strong> {{ key }}</strong></td>
                   <td><strong> {{ value }}</strong></td>
                 </tr>
               {% endfor %}
-            {% endfor %}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        {% elif error %}
+          <div class="alert alert-danger" role="alert">
+            {{ error }}
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
