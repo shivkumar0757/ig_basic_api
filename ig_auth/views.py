@@ -9,16 +9,33 @@ def home(request):
     }
     return render(request, 'home.html', context)
 
+
+from urllib.parse import urlparse, parse_qs
+
 def auth(request):
     full_url = request.build_absolute_uri()
     base_url = request.build_absolute_uri('/')[:-1].strip("/")
-    code = request.GET.get('code', '')
+    parsed_url = urlparse(full_url)
+    parameters = parse_qs(parsed_url.query)
 
-    data = {
+    context = {
         'full_url': full_url,
         'base_url': base_url,
-        'parameters': {
-            'code': code,
-        },
+        'parameters': parameters,
     }
-    return JsonResponse(data, json_dumps_params={'indent': 2})
+    return render(request, 'auth.html', context)
+
+
+# def auth(request):
+#     full_url = request.build_absolute_uri()
+#     base_url = request.build_absolute_uri('/')[:-1].strip("/")
+#     code = request.GET.get('code', '')
+
+#     data = {
+#         'full_url': full_url,
+#         'base_url': base_url,
+#         'parameters': {
+#             'code': code,
+#         },
+#     }
+#     return JsonResponse(data, json_dumps_params={'indent': 2})

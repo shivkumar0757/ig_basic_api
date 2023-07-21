@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mt-5">
+        <h1 class="mb-4">Auth</h1>
+        <hr>
+        <p><strong>URL:</strong> {{ full_url }}</p>
+        <hr>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Base URL </td>
+              <td> {{ base_url }}</td>
+            </tr>
+            {% for key, values in parameters.items %}
+              {% for value in values %}
+                <tr>
+                  <td><strong> {{ key }}</strong></td>
+                  <td><strong> {{ value }}</strong></td>
+                </tr>
+              {% endfor %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}
